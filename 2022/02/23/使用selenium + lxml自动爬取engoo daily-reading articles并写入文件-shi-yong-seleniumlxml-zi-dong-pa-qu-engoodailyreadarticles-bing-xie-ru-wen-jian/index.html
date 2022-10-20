@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>使用selenium + lxml自动爬取engoo daily-reading articles并写入文件 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="engoo是一个学习英语的网站，通过阅读每日新闻，回答问题可以提高你的英语语感，与人交流时对不同的话题有更多的见解 我每天都会阅读两篇文章，然后制作成markdown记录下来，但是日复一日的拷贝文章，复制问题真的非常的麻烦。所以这里我决定使用脚本将它们爬取下来，这样我只要每天运行一次将获取到的文件拷贝到markdown里即可。刚开始我准备使用requests + lxml直接爬取文章的，但是我发现">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用selenium + lxml自动爬取engoo daily-reading articles并写入文件">
+<meta property="og:url" content="http://example.com/2022/02/23/%E4%BD%BF%E7%94%A8selenium%20+%20lxml%E8%87%AA%E5%8A%A8%E7%88%AC%E5%8F%96engoo%20daily-reading%20articles%E5%B9%B6%E5%86%99%E5%85%A5%E6%96%87%E4%BB%B6-shi-yong-seleniumlxml-zi-dong-pa-qu-engoodailyreadarticles-bing-xie-ru-wen-jian/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="engoo是一个学习英语的网站，通过阅读每日新闻，回答问题可以提高你的英语语感，与人交流时对不同的话题有更多的见解 我每天都会阅读两篇文章，然后制作成markdown记录下来，但是日复一日的拷贝文章，复制问题真的非常的麻烦。所以这里我决定使用脚本将它们爬取下来，这样我只要每天运行一次将获取到的文件拷贝到markdown里即可。刚开始我准备使用requests + lxml直接爬取文章的，但是我发现">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-02-23T08:55:10.549Z">
+<meta property="article:modified_time" content="2022-02-23T13:31:19.622Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="selenium">
+<meta property="article:tag" content="lxml">
+<meta name="twitter:card" content="summary">
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      document.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightBlock(block);
+      });
+    });
+  </script>
+  
+<link rel="stylesheet" href="/css/index.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/" class="title">Clover Tuan</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn iconfont icon-dribbble"></a>
+          
+        
+          
+            <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn iconfont icon-behance"></a>
+          
+        
+          
+            <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn iconfont icon-lofter"></a>
+          
+        
+          
+            <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn iconfont icon-instagram"></a>
+          
+        
+          
+            <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/" class="nav-menu ">HOME</a>
+          
+        
+            <a href="/archives" class="nav-menu ">ARCHIVE</a>
+          
+        
+            <a href="/about" class="nav-menu ">ABOUT</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+    <div id="main"><section class="article">
+  <h2 class="title">使用selenium + lxml自动爬取engoo daily-reading articles并写入文件</h2>
+  <p class="sub">Feb 23, 2022</p>
+  <article class="content">
+    <p>engoo是一个学习英语的网站，通过阅读每日新闻，回答问题可以提高你的英语语感，与人交流时对不同的话题有更多的见解 我每天都会阅读两篇文章，然后制作成markdown记录下来，但是日复一日的拷贝文章，复制问题真的非常的麻烦。所以这里我决定使用脚本将它们爬取下来，这样我只要每天运行一次将获取到的文件拷贝到markdown里即可。<br>刚开始我准备使用<code>requests + lxml</code>直接爬取文章的，但是我发现该网站使用 <code>google tags manager</code>，使用requests的话完全拿不到数据。最终使用<code>selenium + lxml</code></p>
+<h2 id="requirements-txt"><a href="#requirements-txt" class="headerlink" title="requirements.txt"></a>requirements.txt</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">lxml==<span class="number">4.8</span><span class="number">.0</span></span><br><span class="line">selenium==<span class="number">4.1</span><span class="number">.0</span></span><br></pre></td></tr></table></figure>
+<h2 id="导库"><a href="#导库" class="headerlink" title="导库"></a>导库</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> datetime</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">from</span> selenium <span class="keyword">import</span> webdriver</span><br><span class="line"><span class="keyword">from</span> lxml <span class="keyword">import</span> etree</span><br><span class="line"><span class="comment"># from selenium.webdriver.chrome.options import Options</span></span><br></pre></td></tr></table></figure>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line">ch_option = Options()</span><br><span class="line"><span class="comment"># 该网站使用无头浏览器会拿不到数据</span></span><br><span class="line"><span class="comment"># ch_option.add_argument(&quot;--headless&quot;)</span></span><br><span class="line"></span><br><span class="line">driver = webdriver.Chrome(options=ch_option)</span><br><span class="line">driver.get(<span class="string">&quot;https://engoo.com/app/daily-news&quot;</span>)</span><br><span class="line"></span><br><span class="line">time.sleep(<span class="number">5</span>)</span><br><span class="line">page_source = driver.page_source</span><br><span class="line">tree = etree.HTML(page_source)</span><br><span class="line">false_urls = tree.xpath(<span class="string">&#x27;//*[@id=&quot;content&quot;]/div[1]/div[1]/div[2]/div/div[2]/a/@href&#x27;</span>)</span><br><span class="line">article = <span class="string">&quot;&quot;&quot;&quot;&quot;&quot;</span></span><br><span class="line"><span class="keyword">for</span> index, url <span class="keyword">in</span> <span class="built_in">enumerate</span>(false_urls):</span><br><span class="line">    true_url = <span class="string">&quot;https://engoo.com&quot;</span> + url</span><br><span class="line">    <span class="comment"># print(true_url)</span></span><br><span class="line">    driver.get(true_url)</span><br><span class="line">    time.sleep(<span class="number">5</span>)</span><br><span class="line">    <span class="comment"># print(driver.page_source)</span></span><br><span class="line">    tree = etree.HTML(driver.page_source)</span><br><span class="line">    title = tree.xpath(<span class="string">&#x27;//*[@id=&quot;windowexercise-2&quot;]/div/div/div/div[3]/div/div[1]/div/div/span/span/span/text()&#x27;</span>)[<span class="number">0</span>]</span><br><span class="line">    contents_list = tree.xpath(<span class="string">&#x27;//*[@id=&quot;windowexercise-2&quot;]/div/div/div/div[3]/div/p/span/span/span/text()&#x27;</span>)</span><br><span class="line">    contents = <span class="string">&quot;&quot;&quot;&quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">for</span> p <span class="keyword">in</span> contents_list:</span><br><span class="line">        contents = contents + <span class="string">&quot;\n&quot;</span> + <span class="string">f&quot;&lt;p&gt;<span class="subst">&#123;p&#125;</span>&lt;/p&gt;&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># print(contents)</span></span><br><span class="line">    session_name = tree.xpath(</span><br><span class="line">        <span class="string">&#x27;//*[@id=&quot;windowexercise-3&quot;]/div/div/div/div[1]/div[2]/div/span[1]/span/span/span/text()&#x27;</span></span><br><span class="line">    )[<span class="number">0</span>]</span><br><span class="line">    <span class="comment"># print(session_name)</span></span><br><span class="line">    questions = <span class="string">&quot;&quot;&quot;&quot;&quot;&quot;</span></span><br><span class="line">    discussion = <span class="string">&quot;&quot;&quot;&quot;&quot;&quot;</span></span><br><span class="line">    further_discussion = <span class="string">&quot;&quot;&quot;&quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">if</span> session_name == <span class="string">&quot;Questions&quot;</span>:</span><br><span class="line">        questions_list = tree.xpath(</span><br><span class="line">            <span class="string">&#x27;//*[@id=&quot;windowexercise-3&quot;]/div/div/div/div[3]/div/div/div/div[1]/div/div[2]/div/div/div/span/span/span/text()&#x27;</span></span><br><span class="line">        )</span><br><span class="line">        <span class="keyword">for</span> q <span class="keyword">in</span> questions_list:</span><br><span class="line">            questions = questions + <span class="string">&quot;\n&quot;</span> + <span class="string">f&quot;+ <span class="subst">&#123;q&#125;</span>   \n&lt;font style=&#x27;color:green&#x27;&gt;&lt;/font&gt;\n&quot;</span></span><br><span class="line"></span><br><span class="line">        discussion_list = tree.xpath(</span><br><span class="line">            <span class="string">&#x27;//*[@id=&quot;windowexercise-4&quot;]/div/div/div/div[3]/div/div/div/div[1]/div/div[2]/div/div/div/span/span/span/text()&#x27;</span></span><br><span class="line">        )</span><br><span class="line">        <span class="keyword">for</span> d <span class="keyword">in</span> discussion_list:</span><br><span class="line">            discussion = discussion + <span class="string">&quot;\n&quot;</span> + <span class="string">f&quot;+ <span class="subst">&#123;d&#125;</span>   \n&lt;font style=&#x27;color:green&#x27;&gt;&lt;/font&gt;\n&quot;</span></span><br><span class="line"></span><br><span class="line">        further_discussion_list = tree.xpath(</span><br><span class="line">            <span class="string">&#x27;//*[@id=&quot;windowexercise-5&quot;]/div/div/div/div[3]/div/div/div/div[1]/div/div[2]/div/div/div/span/span/span/text()&#x27;</span></span><br><span class="line">        )</span><br><span class="line">        <span class="keyword">for</span> f <span class="keyword">in</span> further_discussion_list:</span><br><span class="line">            further_discussion = further_discussion + <span class="string">&quot;\n&quot;</span> + <span class="string">f&quot;+ <span class="subst">&#123;f&#125;</span>   \n&lt;font style=&#x27;color:green&#x27;&gt;&lt;/font&gt;\n&quot;</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        discussion = <span class="string">&quot;&quot;&quot;&quot;&quot;&quot;</span></span><br><span class="line">        discussion_list = tree.xpath(</span><br><span class="line">            <span class="string">&#x27;//*[@id=&quot;windowexercise-3&quot;]/div/div/div/div[3]/div/div/div/div[1]/div/div[2]/div/div/div/span/span/span/text()&#x27;</span></span><br><span class="line">        )</span><br><span class="line">        <span class="keyword">for</span> d <span class="keyword">in</span> discussion_list:</span><br><span class="line">            discussion = discussion + <span class="string">&quot;\n&quot;</span> + <span class="string">f&quot;+ <span class="subst">&#123;d&#125;</span>   \n&lt;font style=&#x27;color:green&#x27;&gt;&lt;/font&gt;\n&quot;</span></span><br><span class="line">        further_discussion = <span class="string">&quot;&quot;&quot;&quot;&quot;&quot;</span></span><br><span class="line">        further_discussion_list = tree.xpath(</span><br><span class="line">            <span class="string">&#x27;//*[@id=&quot;windowexercise-4&quot;]/div/div/div/div[3]/div/div/div/div[1]/div/div[2]/div/div/div/span/span/span/text()&#x27;</span></span><br><span class="line">        )</span><br><span class="line">        <span class="keyword">for</span> f <span class="keyword">in</span> further_discussion_list:</span><br><span class="line">            further_discussion = further_discussion + <span class="string">&quot;\n&quot;</span> + <span class="string">f&quot;+ <span class="subst">&#123;f&#125;</span>   \n&lt;font style=&#x27;color:green&#x27;&gt;&lt;/font&gt;\n&quot;</span></span><br><span class="line"></span><br><span class="line">    article1 = <span class="string">f&quot;&quot;&quot;## Article<span class="subst">&#123;index + <span class="number">1</span>&#125;</span>\n\n**[<span class="subst">&#123;title&#125;</span>](<span class="subst">&#123;true_url&#125;</span>)**\n<span class="subst">&#123;contents&#125;</span>\n\n**Question**\n<span class="subst">&#123;questions&#125;</span>\n\n**Discussion**\n <span class="subst">&#123;discussion&#125;</span>\n\n**Further discussion**\n<span class="subst">&#123;further_discussion&#125;</span></span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">    article = article + article1 + <span class="string">&quot;\n&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># print(article)</span></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;daily-read.txt&#x27;</span>, <span class="string">&#x27;w&#x27;</span>, encoding=<span class="string">&#x27;utf-8&#x27;</span>) <span class="keyword">as</span> fp:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;正在写入...&quot;</span>)</span><br><span class="line">    fp.write(<span class="string">f&#x27;# <span class="subst">&#123;datetime.datetime.now().strftime(<span class="string">&quot;%d/%m/%Y&quot;</span>)&#125;</span>\n&#x27;</span> + article)</span><br><span class="line">driver.quit()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>最后得到的txt文件符合mardown格式，每天我只需要将txt中的文本复制到typora中即可。简单快捷</p>
+
+  </article>
+  <footer class="f-cf">
+    
+      <a href="/2022/03/14/The%20green%20workplace-thegreenworkplace/" class="link f-fl">⟵The green workplace</a>
+    
+    
+      <a href="/2022/02/23/Comparing%20situations-comparingsituations/" class="link f-fr">Comparing situations⟶</a>
+    
+  </footer>
+</section></div>
+    <footer id="footer" class="f-cf">
+  d.guangying@foxmail.com
+  
+    
+      
+        · <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn">Dribbble</a>
+      
+    
+      
+        · <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn">Behance</a>
+      
+    
+      
+        · <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn">Lofter</a>
+      
+    
+      
+        · <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn">Instagram</a>
+      
+    
+      
+        · <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn">GitHub</a>
+      
+    
+  
+  <span class="copyright">All rights reserved @Clover Tuan</span>
+</footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>典型面试题 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Question:描述在浏览器输入www.baidu.com后执行的全部过程 Answer: 客户端浏览器首先获取本地host文件获取IP,如果哦获取不到再通过DNS解析道www.baidu.com的IP地址220.181.27.48, 痛殴这个IP地址找到客户端到服务端的路径 客户端浏览器发起一个HTTP会话到220.181.27.48, 通过TCP握手建立连接,然后通过TCP进行封装数据包,输">
+<meta property="og:type" content="article">
+<meta property="og:title" content="典型面试题">
+<meta property="og:url" content="http://example.com/2021/11/09/%E5%85%B8%E5%9E%8B%E9%9D%A2%E8%AF%95%E9%A2%98-%E5%85%B8%E5%9E%8B%E9%9D%A2%E8%AF%95%E9%A2%98/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Question:描述在浏览器输入www.baidu.com后执行的全部过程 Answer: 客户端浏览器首先获取本地host文件获取IP,如果哦获取不到再通过DNS解析道www.baidu.com的IP地址220.181.27.48, 痛殴这个IP地址找到客户端到服务端的路径 客户端浏览器发起一个HTTP会话到220.181.27.48, 通过TCP握手建立连接,然后通过TCP进行封装数据包,输">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-11-08T19:18:23.837Z">
+<meta property="article:modified_time" content="2021-11-08T19:36:09.751Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      document.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightBlock(block);
+      });
+    });
+  </script>
+  
+<link rel="stylesheet" href="/css/index.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/" class="title">Clover Tuan</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn iconfont icon-dribbble"></a>
+          
+        
+          
+            <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn iconfont icon-behance"></a>
+          
+        
+          
+            <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn iconfont icon-lofter"></a>
+          
+        
+          
+            <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn iconfont icon-instagram"></a>
+          
+        
+          
+            <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/" class="nav-menu ">HOME</a>
+          
+        
+            <a href="/archives" class="nav-menu ">ARCHIVE</a>
+          
+        
+            <a href="/about" class="nav-menu ">ABOUT</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+    <div id="main"><section class="article">
+  <h2 class="title">典型面试题</h2>
+  <p class="sub">Nov 9, 2021</p>
+  <article class="content">
+    <h2 id="Question"><a href="#Question" class="headerlink" title="Question:"></a>Question:</h2><p>描述在浏览器输入<code>www.baidu.com</code>后执行的全部过程</p>
+<h2 id="Answer"><a href="#Answer" class="headerlink" title="Answer:"></a>Answer:</h2><ol>
+<li>客户端浏览器首先获取本地host文件获取IP,如果哦获取不到再通过DNS解析道<code>www.baidu.com</code>的IP地址220.181.27.48, 痛殴这个IP地址找到客户端到服务端的路径</li>
+<li>客户端浏览器发起一个HTTP会话到220.181.27.48, 通过TCP握手建立连接,然后通过TCP进行封装数据包,输入到网络层</li>
+<li>在客户端的传输层, 把HTTP会话请求分成报文段, 通过源和目的端口,如服务器使用80端口监听客户端的请求,客户端有系统随机选择一个端口,如5000,与服务器进行交换,服务器把相应的请求返回给客户端的5000端口.</li>
+<li>然后使用IP层的IP地址查找目的段. 客户端的网络层不用关心应用层或者传输层的东西,主要做的是通过查找路由表确定如何到达服务端</li>
+<li>期间可能经过多个路由器,这些都是路由器来完成的工作,无非就是通过查找路由表来确定通过哪个路径到达服务器</li>
+<li>客户端的链路层,包通过链路层发送到路由器,通过邻居协议查找给定IP地址的Mac地址</li>
+<li>然后发送ARP请求查找目的地址,如果得到回应之后就可以使用ARP的请求应答交换的IP数据包现在就可以传输了,然后发送IP数据包到达服务器的地址.</li>
+<li>把服务器处理请求响应首页数据反向传输, 传输到客户端以后 , TCP连接释放,浏览器将首页文件进行解析,并将Web页显示给用户.</li>
+</ol>
+
+  </article>
+  <footer class="f-cf">
+    
+      <a href="/2021/11/09/Django%E5%85%B3%E9%97%ADdebug%E5%90%8E,%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AE%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90-django%E5%85%B3%E9%97%ADdebug%E5%90%8E%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AE%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90/" class="link f-fl">⟵Django关闭debug后,无法访问静态资源</a>
+    
+    
+      <a href="/2021/11/03/Navicat%20%E6%B1%89%E5%8C%96%E6%96%B9%E6%A1%88-navicat%E6%B1%89%E5%8C%96%E6%96%B9%E6%A1%88/" class="link f-fr">Navicat 汉化方案⟶</a>
+    
+  </footer>
+</section></div>
+    <footer id="footer" class="f-cf">
+  d.guangying@foxmail.com
+  
+    
+      
+        · <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn">Dribbble</a>
+      
+    
+      
+        · <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn">Behance</a>
+      
+    
+      
+        · <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn">Lofter</a>
+      
+    
+      
+        · <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn">Instagram</a>
+      
+    
+      
+        · <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn">GitHub</a>
+      
+    
+  
+  <span class="copyright">All rights reserved @Clover Tuan</span>
+</footer>
+  </div>
+</body>
+</html>

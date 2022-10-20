@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>01 简易版本web框架 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="软件开发架构123cs架构bs架构# 本质bs也是cs  纯手撸web框架123456789101112131415161718192021222324252627282930# http协议&quot;&quot;&quot;http协议	数据传输是明文的https协议	数据传输是密文的websocket协议	数据传输是密文的四大特性:    1. 基于请求相应    2. 给予tcp,ip作用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="01 简易版本web框架">
+<meta property="og:url" content="http://example.com/2021/03/04/01%20%E7%AE%80%E6%98%93%E7%89%88%E6%9C%ACweb%E6%A1%86%E6%9E%B6-01%E7%AE%80%E6%98%93%E7%89%88%E6%9C%ACweb%E6%A1%86%E6%9E%B6/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="软件开发架构123cs架构bs架构# 本质bs也是cs  纯手撸web框架123456789101112131415161718192021222324252627282930# http协议&quot;&quot;&quot;http协议	数据传输是明文的https协议	数据传输是密文的websocket协议	数据传输是密文的四大特性:    1. 基于请求相应    2. 给予tcp,ip作用">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-03-03T19:17:11.000Z">
+<meta property="article:modified_time" content="2021-11-08T19:53:41.486Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="django">
+<meta name="twitter:card" content="summary">
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      document.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightBlock(block);
+      });
+    });
+  </script>
+  
+<link rel="stylesheet" href="/css/index.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/" class="title">Clover Tuan</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn iconfont icon-dribbble"></a>
+          
+        
+          
+            <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn iconfont icon-behance"></a>
+          
+        
+          
+            <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn iconfont icon-lofter"></a>
+          
+        
+          
+            <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn iconfont icon-instagram"></a>
+          
+        
+          
+            <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/" class="nav-menu ">HOME</a>
+          
+        
+            <a href="/archives" class="nav-menu ">ARCHIVE</a>
+          
+        
+            <a href="/about" class="nav-menu ">ABOUT</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+    <div id="main"><section class="article">
+  <h2 class="title">01 简易版本web框架</h2>
+  <p class="sub">Mar 4, 2021</p>
+  <article class="content">
+    <h1 id="软件开发架构"><a href="#软件开发架构" class="headerlink" title="软件开发架构"></a>软件开发架构</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cs架构</span><br><span class="line">bs架构</span><br><span class="line"><span class="comment"># 本质bs也是cs</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="纯手撸web框架"><a href="#纯手撸web框架" class="headerlink" title="纯手撸web框架"></a>纯手撸web框架</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># http协议</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">http协议	数据传输是明文的</span></span><br><span class="line"><span class="string">https协议	数据传输是密文的</span></span><br><span class="line"><span class="string">websocket协议	数据传输是密文的</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">四大特性:</span></span><br><span class="line"><span class="string">    1. 基于请求相应</span></span><br><span class="line"><span class="string">    2. 给予tcp,ip作用于应用层</span></span><br><span class="line"><span class="string">    3. 无状态</span></span><br><span class="line"><span class="string">    4. 短/无连接</span></span><br><span class="line"><span class="string">数据格式:</span></span><br><span class="line"><span class="string">    请求首行</span></span><br><span class="line"><span class="string">    请求头</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    请求体</span></span><br><span class="line"><span class="string">响应状态吗</span></span><br><span class="line"><span class="string">	1xx</span></span><br><span class="line"><span class="string">	2xx	200</span></span><br><span class="line"><span class="string">	3xx  </span></span><br><span class="line"><span class="string">	4xx	403 404</span></span><br><span class="line"><span class="string">	5xx	500</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 如何做到后缀的不同返回不同的内容</span></span><br><span class="line">	<span class="comment"># 拿到用户输入的后缀 做判断</span></span><br><span class="line"><span class="comment"># 纯手撸的代码不好之处:</span></span><br><span class="line">	<span class="number">1.</span> 代码重复</span><br><span class="line">    <span class="number">2.</span> 手动处理http格式数据 并且只能拿到URL后缀 其他数据获取繁琐</span><br><span class="line">    <span class="number">3.</span> 并发问题</span><br></pre></td></tr></table></figure>
+
+<h1 id="借助于wsgiref模块"><a href="#借助于wsgiref模块" class="headerlink" title="借助于wsgiref模块"></a>借助于<code>wsgiref</code>模块</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">urls.py		路由与视图函数的对应关系</span></span><br><span class="line"><span class="string">views.py	视图函数存放点(后端业务逻辑)</span></span><br><span class="line"><span class="string">templates	存放HTML文件</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="comment"># 按照功能的不同拆分以后	后续添加功能只需要先添加路由,然后闯将业务逻辑即可</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="动静态网页"><a href="#动静态网页" class="headerlink" title="动静态网页"></a>动静态网页</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">静态网页</span></span><br><span class="line"><span class="string">	页面上的数据是直接写死的,万年不变</span></span><br><span class="line"><span class="string">动态网页</span></span><br><span class="line"><span class="string">	数据是动态加载出来的</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="comment"># 动态网页</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>模板语法 - <code>jinja2</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">pip install jinja2</span><br><span class="line"><span class="comment"># 模板语法(非常贴近python语法)</span></span><br><span class="line">&#123;&#123; user.username &#125;&#125;</span><br><span class="line"><span class="string">&quot;&quot;&quot;模板语法是在后端起作用的,前端游览器是不识别&quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+  </article>
+  <footer class="f-cf">
+    
+      <a href="/2021/03/05/02%20Django%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A-02django%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A/" class="link f-fl">⟵02 Django入门到精通</a>
+    
+    
+      <a href="/2020/09/20/03%20C%E8%AF%AD%E8%A8%80-%E6%8C%87%E9%92%88-03c%E8%AF%AD%E8%A8%80-%E6%8C%87%E9%92%88/" class="link f-fr">03 C语言-指针⟶</a>
+    
+  </footer>
+</section></div>
+    <footer id="footer" class="f-cf">
+  d.guangying@foxmail.com
+  
+    
+      
+        · <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn">Dribbble</a>
+      
+    
+      
+        · <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn">Behance</a>
+      
+    
+      
+        · <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn">Lofter</a>
+      
+    
+      
+        · <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn">Instagram</a>
+      
+    
+      
+        · <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn">GitHub</a>
+      
+    
+  
+  <span class="copyright">All rights reserved @Clover Tuan</span>
+</footer>
+  </div>
+</body>
+</html>

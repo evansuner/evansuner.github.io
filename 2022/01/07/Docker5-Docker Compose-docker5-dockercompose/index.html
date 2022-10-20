@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Docker5-Docker Compose | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="使用Docker Compose可以轻松、高效的管理容器，他是一个用于定义和运行多容器Docker的应用程序工具。Docker官方编排(Orchestration)项目之一，负责快速的部署分布式应用。  安装12345678910# 将安装包直接下载到本地（版本自行指定）# 国内访问github速度太慢，建议手动下载后使用sftp上传到服务器➜  ~ wget https:&#x2F;&#x2F;github.co">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Docker5-Docker Compose">
+<meta property="og:url" content="http://example.com/2022/01/07/Docker5-Docker%20Compose-docker5-dockercompose/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="使用Docker Compose可以轻松、高效的管理容器，他是一个用于定义和运行多容器Docker的应用程序工具。Docker官方编排(Orchestration)项目之一，负责快速的部署分布式应用。  安装12345678910# 将安装包直接下载到本地（版本自行指定）# 国内访问github速度太慢，建议手动下载后使用sftp上传到服务器➜  ~ wget https:&#x2F;&#x2F;github.co">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-01-07T13:24:11.019Z">
+<meta property="article:modified_time" content="2022-01-08T12:19:39.149Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="docker">
+<meta name="twitter:card" content="summary">
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      document.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightBlock(block);
+      });
+    });
+  </script>
+  
+<link rel="stylesheet" href="/css/index.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/" class="title">Clover Tuan</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn iconfont icon-dribbble"></a>
+          
+        
+          
+            <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn iconfont icon-behance"></a>
+          
+        
+          
+            <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn iconfont icon-lofter"></a>
+          
+        
+          
+            <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn iconfont icon-instagram"></a>
+          
+        
+          
+            <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/" class="nav-menu ">HOME</a>
+          
+        
+            <a href="/archives" class="nav-menu ">ARCHIVE</a>
+          
+        
+            <a href="/about" class="nav-menu ">ABOUT</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+    <div id="main"><section class="article">
+  <h2 class="title">Docker5-Docker Compose</h2>
+  <p class="sub">Jan 7, 2022</p>
+  <article class="content">
+    <blockquote>
+<p>使用Docker Compose可以轻松、高效的管理容器，他是一个用于定义和运行多容器Docker的应用程序工具。Docker官方编排(Orchestration)项目之一，负责快速的部署分布式应用。</p>
+</blockquote>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将安装包直接下载到本地（版本自行指定）</span></span><br><span class="line"><span class="comment"># 国内访问github速度太慢，建议手动下载后使用sftp上传到服务器</span></span><br><span class="line">➜  ~ wget https://github.com/docker/compose/releases/download/v2.2.3/docker-compose-linux-x86_64</span><br><span class="line"><span class="comment"># 移动到/usr/local/bin 重命名并授权</span></span><br><span class="line">➜  ~ <span class="built_in">mv</span> ./docker-compose-linux-x86_64 /usr/local/bin/docker-compose</span><br><span class="line">docker-compose</span><br><span class="line">➜  ~ <span class="built_in">chmod</span> +x /usr/local/bin/docker-compose</span><br><span class="line"><span class="comment"># 查看版本</span></span><br><span class="line">➜  ~ docker-compose version</span><br><span class="line">Docker Compose version v2.2.3</span><br></pre></td></tr></table></figure>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><h3 id="术语"><a href="#术语" class="headerlink" title="术语"></a>术语</h3><ul>
+<li>服务(service)：一个应用容器，实际上可以运行多个相同的镜像实例</li>
+<li>项目(project)：由一组关联的应用容器组成一个完整业务单元</li>
+</ul>
+<p>一个项目可以由多个服务（容器）关联而成，Compose面向项目进行管理</p>
+<h3 id="Docker-compose创建容器"><a href="#Docker-compose创建容器" class="headerlink" title="Docker-compose创建容器"></a>Docker-compose创建容器</h3><p>通过一个单独的<code>docker-compose.yml</code>模板文件(yaml格式)来定义一组相关联的应用容器为一个项目<br><strong>yml格式描述：</strong>   </p>
+<ul>
+<li>yml文件以缩进代表层级关系</li>
+<li>缩进不允许使用tab，只能使用空格</li>
+<li>空格个数不重要，只要相同层级的元素左对齐即可（建议2个）</li>
+<li>大小写敏感</li>
+<li>数据格式为，name:(空格)value</li>
+</ul>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># key:(空格)value：表示一对键值对（空格不能省略），空格控制层级关系，只要是左对齐的数据表示同一级别:</span></span><br><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">8083</span></span><br><span class="line">  <span class="attr">path:</span> <span class="string">/helloboot</span></span><br><span class="line">  </span><br><span class="line"><span class="comment"># 数组(用-表示数组中的一个元素):</span></span><br><span class="line"><span class="attr">animal:</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">cat</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">dog</span></span><br></pre></td></tr></table></figure>
+<p><strong>示例1</strong><br>使用Docker-compose的方式管理一个Tomcat容器和MySQL</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建文件夹，创建对应的目录并创建文件</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /opt/docker-compose/docker_mysql_tomcat</span><br><span class="line"><span class="built_in">cd</span> /opt/docker-compose/docker_mysql_tomcat</span><br><span class="line">vim docker-compose.yml</span><br></pre></td></tr></table></figure>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">&#x27;3.1&#x27;</span></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">mysql:</span>                                        <span class="comment"># 服务的名称</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span>                             <span class="comment"># 只要docker启动，容器会随着启动</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">daocloud.io/library/mysql:5.7.6</span>      <span class="comment"># 指定镜像路径信息(默认官方镜像地址)</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">mysql-3306</span>                  <span class="comment"># 指定容器名称 --name </span></span><br><span class="line">    <span class="attr">ports:</span>                                      <span class="comment"># 指定端口号映射</span></span><br><span class="line">      <span class="bullet">-</span> <span class="number">3306</span><span class="string">:3306</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="attr">MYSQL_ROOT_PASSWORD:</span> <span class="string">root</span>                 <span class="comment"># 指定MYSQL ROOT用户的密码 </span></span><br><span class="line">      <span class="attr">TZ:</span> <span class="string">Asiz/Shanghai</span>                         <span class="comment"># 指定时区</span></span><br><span class="line">    <span class="attr">volumes:</span>                                    <span class="comment"># 映射mysql的数据目录到宿主机，保存数据 </span></span><br><span class="line">                                                <span class="comment"># 把mysql的配置文件映射到容器的相应目录</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">/opt/docker_mysql_tomcat/mysql/data:/var/lib/mysql</span> </span><br><span class="line">      <span class="bullet">-</span> <span class="string">/opt/docker_mysql_tomcat/mysql/conf/mysqld.cnf:/etc/mysql/mysql.conf.d/mysqld.cnf</span> </span><br><span class="line"><span class="attr">tomcat:</span></span><br><span class="line">  <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">  <span class="attr">image:</span> <span class="string">daocloud.io/library/tomcat:8.5.15-jre8</span></span><br><span class="line">  <span class="attr">container_name:</span> <span class="string">tomcat-8080</span></span><br><span class="line">  <span class="attr">ports:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="number">8080</span><span class="string">:8080</span></span><br><span class="line">  <span class="attr">environment:</span></span><br><span class="line">    <span class="attr">TZ:</span> <span class="string">Asiz/Shanghai</span></span><br><span class="line">  <span class="attr">volumes:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">/opt/docker_mysql_tomcat/tomcat/webapps:/usr/local/tomcat/webapps</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">/opt/docker_mysql_tomcat/tomcat/logs:/usr/local/tomcat/logs</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 启动</span></span><br><span class="line">docker-compose up -d</span><br><span class="line"><span class="comment"># 默认执行的文件名：docker-compose.yml</span></span><br><span class="line"><span class="comment"># 如果不是默认文件名，需要使用以下命令执行</span></span><br><span class="line">docker-compose -f filename.yml up -d </span><br></pre></td></tr></table></figure>
+<h3 id="docker-compose命令-基于Docker-compose-yml文件"><a href="#docker-compose命令-基于Docker-compose-yml文件" class="headerlink" title="docker-compose命令(基于Docker-compose.yml文件)"></a>docker-compose命令(基于Docker-compose.yml文件)</h3><table>
+<thead>
+<tr>
+<th align="left">命令</th>
+<th align="left">解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">build</td>
+<td align="left">构建或重建服务</td>
+</tr>
+<tr>
+<td align="left">help</td>
+<td align="left">命令帮助</td>
+</tr>
+<tr>
+<td align="left">kill</td>
+<td align="left">杀掉容器</td>
+</tr>
+<tr>
+<td align="left">logs</td>
+<td align="left">显示容器的输出内容</td>
+</tr>
+<tr>
+<td align="left">port</td>
+<td align="left">打印绑定的开放端口</td>
+</tr>
+<tr>
+<td align="left">ps</td>
+<td align="left">显示容器</td>
+</tr>
+<tr>
+<td align="left">pull</td>
+<td align="left">拉取服务镜像</td>
+</tr>
+<tr>
+<td align="left">restart</td>
+<td align="left">重启服务</td>
+</tr>
+<tr>
+<td align="left">rm</td>
+<td align="left">删除停止的容器</td>
+</tr>
+<tr>
+<td align="left">run</td>
+<td align="left">运行一个一次性命令 scale 设置服务的容器数目 start 开启服务</td>
+</tr>
+<tr>
+<td align="left">stop</td>
+<td align="left">停止服务</td>
+</tr>
+<tr>
+<td align="left">up</td>
+<td align="left">创建并启动容器</td>
+</tr>
+<tr>
+<td align="left">down</td>
+<td align="left">停止并删除所有镜像</td>
+</tr>
+</tbody></table>
+<h3 id="常用命令示例-基于Docker-compose-yml文件"><a href="#常用命令示例-基于Docker-compose-yml文件" class="headerlink" title="常用命令示例(基于Docker-compose.yml文件)"></a>常用命令示例(基于Docker-compose.yml文件)</h3><table>
+<thead>
+<tr>
+<th align="left">命令</th>
+<th align="left">解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">docker-compose up -d nginx</td>
+<td align="left">构建启动nignx容器</td>
+</tr>
+<tr>
+<td align="left">docker-compose exec nginx bash</td>
+<td align="left">登录到nginx容器中</td>
+</tr>
+<tr>
+<td align="left">docker-compose down</td>
+<td align="left">删除所有nginx容器,镜像</td>
+</tr>
+<tr>
+<td align="left">docker-compose ps</td>
+<td align="left">显示所有容器</td>
+</tr>
+<tr>
+<td align="left">docker-compose restart nginx</td>
+<td align="left">重新启动nginx容器</td>
+</tr>
+<tr>
+<td align="left">docker-compose run –no-deps –rm php-fpm php -v</td>
+<td align="left">在php-fpm中不启动关联容器，并容器执行php -v 执行完成后删除容器</td>
+</tr>
+<tr>
+<td align="left">docker-compose build nginx</td>
+<td align="left">构建镜像</td>
+</tr>
+<tr>
+<td align="left">docker-compose build –no-cache nginx</td>
+<td align="left">不带缓存的构建</td>
+</tr>
+<tr>
+<td align="left">docker-compose logs nginx</td>
+<td align="left">查看nginx的日志</td>
+</tr>
+<tr>
+<td align="left">docker-compose logs -f nginx</td>
+<td align="left">查看nginx的实时日志</td>
+</tr>
+<tr>
+<td align="left">docker-compose config -q</td>
+<td align="left">验证(docker-compose.yml)文件配置，当配置正确时，不输出任何内容，当文件配 置错误，输出错误信息。</td>
+</tr>
+<tr>
+<td align="left">docker-compose events –json nginx</td>
+<td align="left">以json的形式输出nginx的docker日志</td>
+</tr>
+<tr>
+<td align="left">docker-compose pause nginx</td>
+<td align="left">暂停nignx容器</td>
+</tr>
+<tr>
+<td align="left">docker-compose unpause nginx</td>
+<td align="left">恢复ningx容器</td>
+</tr>
+<tr>
+<td align="left">docker-compose rm nginx</td>
+<td align="left">删除容器(删除前必须关闭容器)</td>
+</tr>
+<tr>
+<td align="left">docker-compose stop nginx</td>
+<td align="left">停止nignx容器</td>
+</tr>
+<tr>
+<td align="left">docker-compose start nginx</td>
+<td align="left">启动nignx容器</td>
+</tr>
+</tbody></table>
+
+  </article>
+  <footer class="f-cf">
+    
+      <a href="/2022/01/09/%E8%A7%A3%E5%86%B3%E7%BB%99%E5%88%97%E8%A1%A8%E6%B7%BB%E5%8A%A0%E5%AD%97%E5%85%B8%E6%97%B6%EF%BC%8C%E5%85%83%E7%B4%A0%E8%A2%AB%E8%A6%86%E7%9B%96%E9%97%AE%E9%A2%98-%E8%A7%A3%E5%86%B3%E7%BB%99%E5%88%97%E8%A1%A8%E6%B7%BB%E5%8A%A0%E5%AD%97%E5%85%B8%E6%97%B6%E5%85%83%E7%B4%A0%E8%A2%AB%E8%A6%86%E7%9B%96%E9%97%AE%E9%A2%98/" class="link f-fl">⟵解决给列表添加字典时，元素被覆盖问题</a>
+    
+    
+      <a href="/2022/01/06/Discussing%20Art-discussingart/" class="link f-fr">Discussing Art⟶</a>
+    
+  </footer>
+</section></div>
+    <footer id="footer" class="f-cf">
+  d.guangying@foxmail.com
+  
+    
+      
+        · <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn">Dribbble</a>
+      
+    
+      
+        · <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn">Behance</a>
+      
+    
+      
+        · <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn">Lofter</a>
+      
+    
+      
+        · <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn">Instagram</a>
+      
+    
+      
+        · <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn">GitHub</a>
+      
+    
+  
+  <span class="copyright">All rights reserved @Clover Tuan</span>
+</footer>
+  </div>
+</body>
+</html>

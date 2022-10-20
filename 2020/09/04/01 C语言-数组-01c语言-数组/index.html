@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>01 C语言-数组 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="一维数组 数组的特点:  可以存储多个数据 一个数组只能存储类型相同的数值类型的多个数据, 是我们在创建数组的时候指定的 数组中可以存储的数据的个数是固定的, 使我们在创建数组的时候指定的 存储在数组中的数据方便管理, 那么到了数组就拿到了数组中的数据   声明数组:  在创建数组之前必须确定两点  确定存储的这个数据的数据类型 这个数组最多可以存储多少个数据   语法 数据类型 数组名称 [数据">
+<meta property="og:type" content="article">
+<meta property="og:title" content="01 C语言-数组">
+<meta property="og:url" content="http://example.com/2020/09/04/01%20C%E8%AF%AD%E8%A8%80-%E6%95%B0%E7%BB%84-01c%E8%AF%AD%E8%A8%80-%E6%95%B0%E7%BB%84/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="一维数组 数组的特点:  可以存储多个数据 一个数组只能存储类型相同的数值类型的多个数据, 是我们在创建数组的时候指定的 数组中可以存储的数据的个数是固定的, 使我们在创建数组的时候指定的 存储在数组中的数据方便管理, 那么到了数组就拿到了数组中的数据   声明数组:  在创建数组之前必须确定两点  确定存储的这个数据的数据类型 这个数组最多可以存储多少个数据   语法 数据类型 数组名称 [数据">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-09-03T18:16:23.000Z">
+<meta property="article:modified_time" content="2021-11-08T19:48:15.405Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="数组">
+<meta name="twitter:card" content="summary">
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      document.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightBlock(block);
+      });
+    });
+  </script>
+  
+<link rel="stylesheet" href="/css/index.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/" class="title">Clover Tuan</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn iconfont icon-dribbble"></a>
+          
+        
+          
+            <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn iconfont icon-behance"></a>
+          
+        
+          
+            <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn iconfont icon-lofter"></a>
+          
+        
+          
+            <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn iconfont icon-instagram"></a>
+          
+        
+          
+            <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/" class="nav-menu ">HOME</a>
+          
+        
+            <a href="/archives" class="nav-menu ">ARCHIVE</a>
+          
+        
+            <a href="/about" class="nav-menu ">ABOUT</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+    <div id="main"><section class="article">
+  <h2 class="title">01 C语言-数组</h2>
+  <p class="sub">Sep 4, 2020</p>
+  <article class="content">
+    <h2 id="一维数组"><a href="#一维数组" class="headerlink" title="一维数组"></a>一维数组</h2><ul>
+<li><p>数组的特点:</p>
+<ol>
+<li>可以存储多个数据</li>
+<li>一个数组只能存储类型相同的数值类型的多个数据, 是我们在创建数组的时候指定的</li>
+<li>数组中可以存储的数据的个数是固定的, 使我们在创建数组的时候指定的</li>
+<li>存储在数组中的数据方便管理, 那么到了数组就拿到了数组中的数据</li>
+</ol>
+</li>
+<li><p>声明数组:</p>
+<ul>
+<li><p>在创建数组之前必须确定两点</p>
+<ol>
+<li>确定存储的这个数据的数据类型</li>
+<li>这个数组最多可以存储多少个数据</li>
+</ol>
+</li>
+<li><p>语法</p>
+<p>数据类型 数组名称 [数据容量];</p>
+<p><code>int scores[5];</code></p>
+<p>代表创建了一个叫scores的array,这个array最多可以存储5个数据,每个数据必须是int类型</p>
+</li>
+<li><p>数据在内存中是如何创建的</p>
+<p>int arr[3]</p>
+<p>a. 现在内存中声明一个数组变量arr</p>
+<p>b. 然后将这个数组平均分成三个等分</p>
+<p>c. 每个小空间的类型就是int类型</p>
+<p>d. 真正存储数据的就是数组里面的小空间</p>
+</li>
+<li><p>专业术语</p>
+<p>元素, 索引, 长度</p>
+</li>
+</ul>
+</li>
+<li><p>向数组中存储数据</p>
+<ul>
+<li><p>数组中存储数据的是数组的元素</p>
+<p>arr[0] &#x3D; 10;</p>
+<p>arr[1] &#x3D; 20;</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="结论-一维数组在函数中"><a href="#结论-一维数组在函数中" class="headerlink" title="结论: 一维数组在函数中"></a>结论: 一维数组在函数中</h3><blockquote>
+<ol>
+<li>当数组作为函数的参数的时候,会丢失数组的长度,所以,这个时候还需要另外传入一个参数,数组的长度</li>
+<li>当数组作为函数的参数的时候, 在函数的内部去修改这个参数数组的与元素,其实修改的就是实参的元素,因为他们指向同一个内存地址</li>
+</ol>
+</blockquote>
+<ul>
+<li><p>数组的高级用法</p>
+<ol>
+<li><p>随机产生一个双色球号码. 1<del>33 随机的产生的6个不重复的数, 1</del>16产生一个随机数</p>
+</li>
+<li><p>如何产生不重复的随机数</p>
+<p>思路:</p>
+<p>​	应该将之前产生的随机数存储起来.没产生一个随机数,都要做判断,如果重复就再次生成随机数</p>
+</li>
+</ol>
+</li>
+</ul>
+<h2 id="二维数组"><a href="#二维数组" class="headerlink" title="二维数组"></a>二维数组</h2><ul>
+<li><p>二维数组的声明</p>
+<ul>
+<li><p>语法:</p>
+<p>数据类型 数组名[行] [列]</p>
+<p>int arr[3] [4]</p>
+</li>
+<li><p>术语:</p>
+<p>元素,下标,长度(行*列)</p>
+</li>
+</ul>
+</li>
+<li><p>二维数组如何存储数据</p>
+<p>使用下标来确定位置</p>
+<p><code>int arr[3][4] = 100;</code></p>
+</li>
+<li><p>使用二维数组的要点</p>
+<p>a. 在声明二维数组的时候 必须要指定行数和列数</p>
+<p>b. 并且这个行数和列数 可以使变量,常量,宏,表达式,也可以是1也可以是0 行数和列数不能是小数</p>
+</li>
+<li><p>关于二维数组的元素的默认值</p>
+<p>如果我们声明一个二维数组 没有为这个二维数组初始化,那么这个二维数能够访问到的数值都是垃圾值</p>
+</li>
+<li><p>初始化方式</p>
+<ol>
+<li><p><code>int arr[3][4]=&#123;&#123;1,2,3,4&#125;,&#123;5,6,7,8&#125;,&#123;9,10,11,12&#125;&#125;;</code></p>
+<p>上面这种方式可以省略行数 <code>int arr[][4]=&#123;&#123;1,2,3,4&#125;,&#123;5,6,7,8&#125;,&#123;9,10,11,12&#125;&#125;;</code></p>
+</li>
+<li><p>直接省略里面的大括弧, 编译器能够根据行数和列数自动判断</p>
+<p><code>int arr[3][4]=&#123;1,2,3,4,5,6,7,8,9,10,11,12&#125;;</code></p>
+<p>上面这种初始化方式能够省略行数 <code>int arr[3][4]=&#123;1,2,3,4,5,6,7,8,9,10,11,12&#125;;</code></p>
+</li>
+<li><p>初始化指定行的数据,那么其他的元素会被直接初始化为0</p>
+<p><code> int arr[3][4]=&#123;&#123;1&#125;,&#123;2&#125;,&#123;3&#125;&#125;;</code></p>
+<p>上面这种初始化方式能够省略行数 <code> int arr[][4]=&#123;&#123;1&#125;,&#123;2&#125;,&#123;3&#125;&#125;;</code></p>
+</li>
+<li><p><code>int arr[3][4]= &#123;1,2,3,4,5&#125;;</code></p>
+</li>
+<li><p>给指定行赋值</p>
+<p><code>int arr=&#123;[0]=&#123;1,2,3,4&#125;&#125;;</code></p>
+</li>
+<li><p>给指定元素赋值</p>
+<p><code>int arr[3][4]=&#123;[0][1]=1&#125;;</code></p>
+</li>
+</ol>
+</li>
+<li><p>什么使用使用二维数组</p>
+<p>特点: 当有行有列的时候</p>
+</li>
+</ul>
+<h3 id="结论-二维数组在函数内"><a href="#结论-二维数组在函数内" class="headerlink" title="结论: 二维数组在函数内"></a>结论: 二维数组在函数内</h3><blockquote>
+<ol>
+<li><p>如果函数的参数是一个二维数组, 那么在调用的时候,实参也必须是一个同类型的二维数组</p>
+</li>
+<li><p>当二维数组作为函数的参数的时候, 会丢失二维数组的行数和列数</p>
+<p>因为声明二维数组的饿时候 并不是去创建一个二维数组,而是创建一个指针变量,</p>
+<p>指向这个二维数组, 指针变量占8个字节</p>
+</li>
+<li><p>当二维数组 作为参数的时候可以不写行,但是必须要写列</p>
+</li>
+<li><p>并且实参和形参的行数都可以省略,但是列数必须要保持一致</p>
+</li>
+</ol>
+<h4 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h4><ul>
+<li><p>让调用者将二维数组的行数和列数都传递过来</p>
+<ol>
+<li>行数</li>
+<li>列数</li>
+</ol>
+<p>注意: 写参数的时候先写行数,列数,在写arr,列数使用参数指定</p>
+</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">test</span><span class="params">(<span class="type">int</span> rows,<span class="type">int</span> cols,arr[][cols])</span>&#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="type">int</span> arr[<span class="number">3</span>][<span class="number">4</span>] = &#123;<span class="number">0</span>&#125;;</span><br><span class="line">    test(<span class="number">3</span>,<span class="number">4</span>,arr);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</blockquote>
+
+  </article>
+  <footer class="f-cf">
+    
+      <a href="/2020/09/16/02%20C%E8%AF%AD%E8%A8%80-%E5%AD%97%E7%AC%A6%E4%B8%B2-02c%E8%AF%AD%E8%A8%80-%E5%AD%97%E7%AC%A6%E4%B8%B2/" class="link f-fl">⟵02 C语言-字符串</a>
+    
+    
+      <a href="/2020/08/22/04%20JavaScript%E5%85%A5%E9%97%A8-04javascriptmd/" class="link f-fr">04 JavaScript入门⟶</a>
+    
+  </footer>
+</section></div>
+    <footer id="footer" class="f-cf">
+  d.guangying@foxmail.com
+  
+    
+      
+        · <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn">Dribbble</a>
+      
+    
+      
+        · <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn">Behance</a>
+      
+    
+      
+        · <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn">Lofter</a>
+      
+    
+      
+        · <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn">Instagram</a>
+      
+    
+      
+        · <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn">GitHub</a>
+      
+    
+  
+  <span class="copyright">All rights reserved @Clover Tuan</span>
+</footer>
+  </div>
+</body>
+</html>

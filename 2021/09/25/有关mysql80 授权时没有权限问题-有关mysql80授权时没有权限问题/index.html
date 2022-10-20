@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>有关mysql8.0 授权时没有权限问题 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="解决mysql8.0报错: ERROR 1410 (42000): You are not allowed to create a user with GRANT1. 今天在到手的Mac上安装了mysql8.x, 想着从Windows上导入一点数据到mac上来,结果在权限分配的时候报错:12mysql&gt; GRANT ALL PRIVILEGES ON *.* TO &amp;#x27;root&amp;#x">
+<meta property="og:type" content="article">
+<meta property="og:title" content="有关mysql8.0 授权时没有权限问题">
+<meta property="og:url" content="http://example.com/2021/09/25/%E6%9C%89%E5%85%B3mysql80%20%E6%8E%88%E6%9D%83%E6%97%B6%E6%B2%A1%E6%9C%89%E6%9D%83%E9%99%90%E9%97%AE%E9%A2%98-%E6%9C%89%E5%85%B3mysql80%E6%8E%88%E6%9D%83%E6%97%B6%E6%B2%A1%E6%9C%89%E6%9D%83%E9%99%90%E9%97%AE%E9%A2%98/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="解决mysql8.0报错: ERROR 1410 (42000): You are not allowed to create a user with GRANT1. 今天在到手的Mac上安装了mysql8.x, 想着从Windows上导入一点数据到mac上来,结果在权限分配的时候报错:12mysql&gt; GRANT ALL PRIVILEGES ON *.* TO &amp;#x27;root&amp;#x">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://i.loli.net/2021/09/14/ldGhVesmfnHXOKA.png">
+<meta property="og:image" content="https://i.loli.net/2021/09/14/4xvlLp8RGrXVZPk.png">
+<meta property="article:published_time" content="2021-09-24T18:18:25.000Z">
+<meta property="article:modified_time" content="2021-11-08T23:55:19.847Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="mysql8.0">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/09/14/ldGhVesmfnHXOKA.png">
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      document.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightBlock(block);
+      });
+    });
+  </script>
+  
+<link rel="stylesheet" href="/css/index.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/" class="title">Clover Tuan</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn iconfont icon-dribbble"></a>
+          
+        
+          
+            <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn iconfont icon-behance"></a>
+          
+        
+          
+            <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn iconfont icon-lofter"></a>
+          
+        
+          
+            <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn iconfont icon-instagram"></a>
+          
+        
+          
+            <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/" class="nav-menu ">HOME</a>
+          
+        
+            <a href="/archives" class="nav-menu ">ARCHIVE</a>
+          
+        
+            <a href="/about" class="nav-menu ">ABOUT</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+    <div id="main"><section class="article">
+  <h2 class="title">有关mysql8.0 授权时没有权限问题</h2>
+  <p class="sub">Sep 25, 2021</p>
+  <article class="content">
+    <h2 id="解决mysql8-0报错-ERROR-1410-42000-You-are-not-allowed-to-create-a-user-with-GRANT"><a href="#解决mysql8-0报错-ERROR-1410-42000-You-are-not-allowed-to-create-a-user-with-GRANT" class="headerlink" title="解决mysql8.0报错: ERROR 1410 (42000): You are not allowed to create a user with GRANT"></a>解决mysql8.0报错: ERROR 1410 (42000): You are not allowed to create a user with GRANT</h2><h3 id="1-今天在到手的Mac上安装了mysql8-x-想着从Windows上导入一点数据到mac上来-结果在权限分配的时候报错"><a href="#1-今天在到手的Mac上安装了mysql8-x-想着从Windows上导入一点数据到mac上来-结果在权限分配的时候报错" class="headerlink" title="1. 今天在到手的Mac上安装了mysql8.x, 想着从Windows上导入一点数据到mac上来,结果在权限分配的时候报错:"></a>1. 今天在到手的Mac上安装了mysql8.x, 想着从Windows上导入一点数据到mac上来,结果在权限分配的时候报错:</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; GRANT ALL PRIVILEGES ON *.* TO <span class="string">&#x27;root&#x27;</span>@<span class="string">&#x27;%&#x27;</span>IDENTIFIED BY <span class="string">&#x27;mypassword&#x27;</span> WITH GRANT OPTION;</span><br><span class="line">ERROR 1064 (42000): You have an error <span class="keyword">in</span> your SQL syntax; check the manual that corresponds to your MySQL server version <span class="keyword">for</span> the right syntax to use near <span class="string">&#x27;IDENTIFIED BY &#x27;</span>mypassword<span class="string">&#x27; WITH GRANT OPTION&#x27;</span> at line 1</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-查完mysql8-x的资料以后得知-mysql8-x分配全新啊不能带密码-需要隐式创建账号了-需要先创建账号-之后才能设置权限"><a href="#2-查完mysql8-x的资料以后得知-mysql8-x分配全新啊不能带密码-需要隐式创建账号了-需要先创建账号-之后才能设置权限" class="headerlink" title="2. 查完mysql8.x的资料以后得知, mysql8.x分配全新啊不能带密码,需要隐式创建账号了, 需要先创建账号,之后才能设置权限:"></a>2. 查完mysql8.x的资料以后得知, mysql8.x分配全新啊不能带密码,需要隐式创建账号了, 需要先创建账号,之后才能设置权限:</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grant all privileges on *.* to root@<span class="string">&#x27;%&#x27;</span> with grant option;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-但是到了这里之后有曝出一个新的错误"><a href="#3-但是到了这里之后有曝出一个新的错误" class="headerlink" title="3. 但是到了这里之后有曝出一个新的错误"></a>3. 但是到了这里之后有曝出一个新的错误</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt;  grant all privileges on *.* to <span class="string">&#x27;username&#x27;</span>@<span class="string">&#x27;%&#x27;</span> with grant option; </span><br><span class="line">ERROR 1410 (42000): You are not allowed to create a user with GRANT</span><br></pre></td></tr></table></figure>
+
+<p>这里说我没有权限使用grant,但是我明明是用的是root用户</p>
+<h3 id="4-尝试修改-mysql数据库中的user表中的host字段"><a href="#4-尝试修改-mysql数据库中的user表中的host字段" class="headerlink" title="4. 尝试修改 mysql数据库中的user表中的host字段"></a>4. 尝试修改 mysql数据库中的user表中的host字段</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; use mysql;</span><br><span class="line">Reading table information <span class="keyword">for</span> completion of table and column names</span><br><span class="line">You can turn off this feature to get a quicker startup with -A</span><br><span class="line"></span><br><span class="line">Database changed</span><br><span class="line">mysql&gt; update user <span class="built_in">set</span> host=<span class="string">&quot;%&quot;</span> <span class="built_in">where</span> user=<span class="string">&#x27;root&#x27;</span>;</span><br><span class="line">Query OK, 1 row affected (0.00 sec)</span><br><span class="line">Rows matched: 1  Changed: 1  Warnings: 0</span><br><span class="line"></span><br><span class="line">mysql&gt; grant all privileges on *.* to root@<span class="string">&#x27;%&#x27;</span>;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line"></span><br><span class="line">flush privileges;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-至此-还没有结束"><a href="#4-至此-还没有结束" class="headerlink" title="4. 至此, 还没有结束!!!"></a>4. 至此, 还没有结束!!!</h3><p>我们使用navicat连接数据库的时候还是会出现报错</p>
+<p><img src="https://i.loli.net/2021/09/14/ldGhVesmfnHXOKA.png" alt="image-20210914012003106"></p>
+<p>这个报错的原因还是在于mysql8.x的安全性问题</p>
+<p>Mysql8.x使用更加安全的密码加密方式,这个和navicat不一样,所以我们需要将mysql进行如下修改:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; alter user root identified with mysql_native_password by <span class="string">&#x27;mypassword&#x27;</span>;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+<p>再次尝试使用navicat连接本地数据库</p>
+<p><img src="https://i.loli.net/2021/09/14/4xvlLp8RGrXVZPk.png" alt="image-20210914012706285"></p>
+<p>连接成功!!!</p>
+
+  </article>
+  <footer class="f-cf">
+    
+      <a href="/2021/10/22/Docker%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A-docker%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A/" class="link f-fl">⟵Docker从入门到精通</a>
+    
+    
+      <a href="/2021/09/10/%E6%95%B0%E6%8D%AE%E5%BA%93(%E5%9F%BA%E4%BA%8Emysql80)-%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E4%BA%8Emysql80/" class="link f-fr">数据库(基于mysql8.0)⟶</a>
+    
+  </footer>
+</section></div>
+    <footer id="footer" class="f-cf">
+  d.guangying@foxmail.com
+  
+    
+      
+        · <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn">Dribbble</a>
+      
+    
+      
+        · <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn">Behance</a>
+      
+    
+      
+        · <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn">Lofter</a>
+      
+    
+      
+        · <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn">Instagram</a>
+      
+    
+      
+        · <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn">GitHub</a>
+      
+    
+  
+  <span class="copyright">All rights reserved @Clover Tuan</span>
+</footer>
+  </div>
+</body>
+</html>
