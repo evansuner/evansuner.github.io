@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Django关闭debug后,无法访问静态资源 | Evan&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="问题出现原因:当我们在开发django应用时如果设置了 DEBUG &#x3D; True，那么django便会自动帮我们对静态文件进行路由；但是当我们设置DEBUG &#x3D; False后，这一功能便没有了，此时静态文件就会出现加载失败的情况，想要让静态文件正常显示，我们就需要配置静态文件服务了。 解决方式: 修改配置文件 settings.py 12345STATIC_URL &#x3D; &amp;#x2">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Django关闭debug后,无法访问静态资源">
+<meta property="og:url" content="http://example.com/2021/11/09/Django%E5%85%B3%E9%97%ADdebug%E5%90%8E,%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AE%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90-django%E5%85%B3%E9%97%ADdebug%E5%90%8E%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AE%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90/index.html">
+<meta property="og:site_name" content="Evan&#39;s Blog">
+<meta property="og:description" content="问题出现原因:当我们在开发django应用时如果设置了 DEBUG &#x3D; True，那么django便会自动帮我们对静态文件进行路由；但是当我们设置DEBUG &#x3D; False后，这一功能便没有了，此时静态文件就会出现加载失败的情况，想要让静态文件正常显示，我们就需要配置静态文件服务了。 解决方式: 修改配置文件 settings.py 12345STATIC_URL &#x3D; &amp;#x2">
+<meta property="og:locale">
+<meta property="article:published_time" content="2021-11-08T19:18:28.327Z">
+<meta property="article:modified_time" content="2021-11-08T23:57:40.688Z">
+<meta property="article:author" content="Evan">
+<meta property="article:tag" content="django">
+<meta name="twitter:card" content="summary">
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      document.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightBlock(block);
+      });
+    });
+  </script>
+  
+<link rel="stylesheet" href="/css/index.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/" class="title">Evan&#39;s Blog</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://github.com/evansuner" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/" class="nav-menu ">HOME</a>
+          
+        
+            <a href="/archives" class="nav-menu ">ARCHIVE</a>
+          
+        
+            <a href="/about" class="nav-menu ">ABOUT</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+    <div id="main"><section class="article">
+  <h2 class="title">Django关闭debug后,无法访问静态资源</h2>
+  <p class="sub">Nov 9, 2021</p>
+  <article class="content">
+    <h2 id="问题出现原因"><a href="#问题出现原因" class="headerlink" title="问题出现原因:"></a>问题出现原因:</h2><p>当我们在开发django应用时如果设置了 DEBUG &#x3D; True，那么django便会自动帮我们对静态文件进行路由；但是当我们设置DEBUG &#x3D; False后，这一功能便没有了，此时静态文件就会出现加载失败的情况，想要让静态文件正常显示，我们就需要配置静态文件服务了。</p>
+<h2 id="解决方式"><a href="#解决方式" class="headerlink" title="解决方式:"></a>解决方式:</h2><ul>
+<li><p>修改配置文件 <code>settings.py</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">STATIC_URL = <span class="string">&#x27;/static/&#x27;</span></span><br><span class="line">STATIC_ROOT = <span class="string">&#x27;static&#x27;</span></span><br><span class="line">STATICFILES_DIRS = [</span><br><span class="line">  os.path.join(BASE_DIR, <span class="string">&#x27;/static/&#x27;</span>), <span class="comment"># 这里如果设置完了之后还是无法访问的话,可以尝试去掉&quot;/&quot;</span></span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改路由文件 <code>urls.py</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.views <span class="keyword">import</span> static</span><br><span class="line"><span class="keyword">from</span> django.conf <span class="keyword">import</span> settings</span><br><span class="line"><span class="keyword">from</span> django.conf.urls <span class="keyword">import</span> url</span><br><span class="line"></span><br><span class="line">urlpatterns = [</span><br><span class="line">  ...</span><br><span class="line">　<span class="comment">##　以下是新增</span></span><br><span class="line">  path(<span class="string">&#x27;static/&lt;path:path&gt;&#x27;</span>, static.serve,&#123;<span class="string">&#x27;document_root&#x27;</span>: settings.STATIC_ROOT&#125;, name=<span class="string">&#x27;static&#x27;</span>),</span><br><span class="line">]</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+  </article>
+  <footer class="f-cf">
+    
+      <a href="/2021/11/09/mysql%E5%8E%9F%E7%90%86%E5%8F%8A%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98-mysql%E5%8E%9F%E7%90%86%E5%8F%8A%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98md/" class="link f-fl">⟵mysql原理及优化实战</a>
+    
+    
+      <a href="/2021/11/09/%E5%85%B8%E5%9E%8B%E9%9D%A2%E8%AF%95%E9%A2%98-%E5%85%B8%E5%9E%8B%E9%9D%A2%E8%AF%95%E9%A2%98/" class="link f-fr">典型面试题⟶</a>
+    
+  </footer>
+</section></div>
+    <footer id="footer" class="f-cf">
+  reidosann@163.com
+  
+    
+      
+        · <a href="https://github.com/evansuner" target="_blank" class="nav-icn">GitHub</a>
+      
+    
+  
+  <span class="copyright">Powered by Evan</span>
+</footer>
+  </div>
+</body>
+</html>

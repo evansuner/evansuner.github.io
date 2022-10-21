@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>01 HTTP协议 | Evan&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="HTTP协议超文本传输协议	用来规定服务端与浏览器之间的数据交互格式 四大特性: 基于请求响应  基于TCP&#x2F;IP作用与应用层上的协议  无状态 不保存用户的信息  由于HTTP协议是无状态的 所以后续出现了一些专门用来记录用户状态的技术 cookie,session,token   无&#x2F;短链接 请求一次我响应一次 之后我们就没有任何链接和关系了  长链接: 双方建立连接之后默">
+<meta property="og:type" content="article">
+<meta property="og:title" content="01 HTTP协议">
+<meta property="og:url" content="http://example.com/2020/08/10/01%20HTTP%E5%8D%8F%E8%AE%AE-01http%E5%8D%8F%E8%AE%AE/index.html">
+<meta property="og:site_name" content="Evan&#39;s Blog">
+<meta property="og:description" content="HTTP协议超文本传输协议	用来规定服务端与浏览器之间的数据交互格式 四大特性: 基于请求响应  基于TCP&#x2F;IP作用与应用层上的协议  无状态 不保存用户的信息  由于HTTP协议是无状态的 所以后续出现了一些专门用来记录用户状态的技术 cookie,session,token   无&#x2F;短链接 请求一次我响应一次 之后我们就没有任何链接和关系了  长链接: 双方建立连接之后默">
+<meta property="og:locale">
+<meta property="article:published_time" content="2020-08-09T18:17:43.000Z">
+<meta property="article:modified_time" content="2021-11-08T19:37:52.194Z">
+<meta property="article:author" content="Evan">
+<meta name="twitter:card" content="summary">
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      document.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightBlock(block);
+      });
+    });
+  </script>
+  
+<link rel="stylesheet" href="/css/index.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/" class="title">Evan&#39;s Blog</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://github.com/evansuner" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/" class="nav-menu ">HOME</a>
+          
+        
+            <a href="/archives" class="nav-menu ">ARCHIVE</a>
+          
+        
+            <a href="/about" class="nav-menu ">ABOUT</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+    <div id="main"><section class="article">
+  <h2 class="title">01 HTTP协议</h2>
+  <p class="sub">Aug 10, 2020</p>
+  <article class="content">
+    <h1 id="HTTP协议"><a href="#HTTP协议" class="headerlink" title="HTTP协议"></a>HTTP协议</h1><p>超文本传输协议	用来规定服务端与浏览器之间的数据交互格式</p>
+<h2 id="四大特性"><a href="#四大特性" class="headerlink" title="四大特性:"></a>四大特性:</h2><ol>
+<li><p>基于请求响应</p>
+</li>
+<li><p>基于TCP&#x2F;IP作用与应用层上的协议</p>
+</li>
+<li><p>无状态</p>
+<p>不保存用户的信息</p>
+<blockquote>
+<p>由于HTTP协议是无状态的 所以后续出现了一些专门用来记录用户状态的技术</p>
+<p>cookie,session,token</p>
+</blockquote>
+</li>
+<li><p>无&#x2F;短链接</p>
+<p>请求一次我响应一次 之后我们就没有任何链接和关系了</p>
+<blockquote>
+<p>长链接: 双方建立连接之后默认不断开	websocket(后面会讲述)</p>
+</blockquote>
+</li>
+</ol>
+<h2 id="请求数据格式"><a href="#请求数据格式" class="headerlink" title="请求数据格式:"></a>请求数据格式:</h2><p>请求首行(标识HTTP协议版本,当前请求方式)</p>
+<p>请求头(大量的键值对)</p>
+<p>请求头和请求体之间的\r\n绝对不能省略</p>
+<p>请求体(并不是所有的请求方式都有 get没有post有	存放的是post请求提交的敏感数据)</p>
+<h2 id="响应数据格式"><a href="#响应数据格式" class="headerlink" title="响应数据格式:"></a>响应数据格式:</h2><p>响应首行(标识HTTP协议版本,当前请求方式,响应状态码)</p>
+<p>响应头(大量的键值对)</p>
+<p>响应头和响应体之间的\r\n绝对不能省略</p>
+<p>响应体(返回给浏览器展示给用户看的数据)</p>
+<h2 id="请求方式"><a href="#请求方式" class="headerlink" title="请求方式:"></a>请求方式:</h2><ol>
+<li><p>get请求</p>
+<p>向服务端要数据</p>
+<p>eg: 输入网址获取对应的内容</p>
+</li>
+<li><p>post请求</p>
+<p>向服务端提交请求</p>
+<p>eg: 用户登录 输入用户名和密码之后 提交到服务端做身份校验</p>
+</li>
+</ol>
+<h2 id="响应状态码"><a href="#响应状态码" class="headerlink" title="响应状态码:"></a>响应状态码:</h2><p>用一段简单的数字来表示一些复杂额状态或者描述性信息</p>
+<p>1XX: 服务端已经接收到了你的数据 正在处理, 你可以继续提交额外的数据</p>
+<p>2XX: 服务端成功响应了你想要的数据	200 OK 请求成功</p>
+<p>3XX: 重定向</p>
+<p>4XX: 请求错误</p>
+<p>​		404:请求资源不存在</p>
+<p>​		403: 当前请求不合法或者不符合访问资源的条件</p>
+<p>5XX: 服务器内部错误(500)</p>
+<h1 id="URL-统一资源定位符"><a href="#URL-统一资源定位符" class="headerlink" title="URL 统一资源定位符"></a>URL 统一资源定位符</h1>
+  </article>
+  <footer class="f-cf">
+    
+      <a href="/2020/08/12/03%20CSS%E4%BB%8E%E5%85%A5%E5%9D%91%E5%88%B0%E6%94%BE%E5%BC%83-03css%E4%BB%8E%E5%85%A5%E5%9D%91%E5%88%B0%E6%94%BE%E5%BC%83/" class="link f-fl">⟵03 CSS从入坑到放弃</a>
+    
+    
+      <a href="/2020/08/10/02%20HTML%E4%BB%8E%E5%85%A5%E5%9D%91%E5%88%B0%E6%94%BE%E5%BC%83-02html%E4%BB%8E%E5%85%A5%E5%9D%91%E5%88%B0%E6%94%BE%E5%BC%83/" class="link f-fr">02 HTML从入坑到放弃⟶</a>
+    
+  </footer>
+</section></div>
+    <footer id="footer" class="f-cf">
+  reidosann@163.com
+  
+    
+      
+        · <a href="https://github.com/evansuner" target="_blank" class="nav-icn">GitHub</a>
+      
+    
+  
+  <span class="copyright">Powered by Evan</span>
+</footer>
+  </div>
+</body>
+</html>

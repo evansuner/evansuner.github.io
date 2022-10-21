@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>数据库61 “Connection refused”报错 | Evan&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="腾讯云-云服务器远程登录MySQL 出现Can‘t connect to MySQL server on ‘xxx‘ (61 “Connection refused”)在腾讯服务器上已经配置好了允许任何 ip 登录，但是使用 navicat 实施远程登录的时候依旧报错，错误信息 Can‘t connect to MySQL server on ‘xxx‘ (61 “Connection refus">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据库61 “Connection refused”报错">
+<meta property="og:url" content="http://example.com/2021/12/01/%E6%95%B0%E6%8D%AE%E5%BA%9361%20%E2%80%9CConnection%20refused%E2%80%9D%E6%8A%A5%E9%94%99-shu-ju-ku-61connectionrefused%E6%8A%A5%E9%94%99/index.html">
+<meta property="og:site_name" content="Evan&#39;s Blog">
+<meta property="og:description" content="腾讯云-云服务器远程登录MySQL 出现Can‘t connect to MySQL server on ‘xxx‘ (61 “Connection refused”)在腾讯服务器上已经配置好了允许任何 ip 登录，但是使用 navicat 实施远程登录的时候依旧报错，错误信息 Can‘t connect to MySQL server on ‘xxx‘ (61 “Connection refus">
+<meta property="og:locale">
+<meta property="og:image" content="https://i.loli.net/2021/12/01/4tIrRzwJFLWMYHp.png">
+<meta property="og:image" content="https://i.loli.net/2021/12/01/jdfEUrhegyst3pL.png">
+<meta property="article:published_time" content="2021-11-30T23:51:21.300Z">
+<meta property="article:modified_time" content="2021-12-10T15:44:03.834Z">
+<meta property="article:author" content="Evan">
+<meta property="article:tag" content="MySQL">
+<meta property="article:tag" content="远程登录">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/12/01/4tIrRzwJFLWMYHp.png">
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      document.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightBlock(block);
+      });
+    });
+  </script>
+  
+<link rel="stylesheet" href="/css/index.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/" class="title">Evan&#39;s Blog</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://github.com/evansuner" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/" class="nav-menu ">HOME</a>
+          
+        
+            <a href="/archives" class="nav-menu ">ARCHIVE</a>
+          
+        
+            <a href="/about" class="nav-menu ">ABOUT</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+    <div id="main"><section class="article">
+  <h2 class="title">数据库61 “Connection refused”报错</h2>
+  <p class="sub">Dec 1, 2021</p>
+  <article class="content">
+    <h2 id="腾讯云-云服务器远程登录MySQL-出现Can‘t-connect-to-MySQL-server-on-‘xxx‘-61-“Connection-refused”"><a href="#腾讯云-云服务器远程登录MySQL-出现Can‘t-connect-to-MySQL-server-on-‘xxx‘-61-“Connection-refused”" class="headerlink" title="腾讯云-云服务器远程登录MySQL 出现Can‘t connect to MySQL server on ‘xxx‘ (61 “Connection refused”)"></a>腾讯云-云服务器远程登录MySQL 出现Can‘t connect to MySQL server on ‘xxx‘ (61 “Connection refused”)</h2><p>在腾讯服务器上已经配置好了允许任何 ip 登录，但是使用 navicat 实施远程登录的时候依旧报错，错误信息 Can‘t connect to MySQL server on ‘xxx‘ (61 “Connection refused”)</p>
+<h3 id="服务器信息："><a href="#服务器信息：" class="headerlink" title="服务器信息："></a>服务器信息：</h3><p><img src="https://i.loli.net/2021/12/01/4tIrRzwJFLWMYHp.png" alt="image-20211201011109006"></p>
+<h3 id="navicat-报错："><a href="#navicat-报错：" class="headerlink" title="navicat 报错："></a>navicat 报错：</h3><p><img src="https://i.loli.net/2021/12/01/jdfEUrhegyst3pL.png" alt="WX20211201-011446@2x"></p>
+<p>远程连接被拒接</p>
+<h3 id="解决方式："><a href="#解决方式：" class="headerlink" title="解决方式："></a>解决方式：</h3><p>这里使用关闭端口防火墙的方式</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">~ systemctl stop firewalld.service </span><br><span class="line">~ systemctl status firewalld.service</span><br><span class="line">● firewalld.service - firewalld - dynamic firewall daemon</span><br><span class="line">   Loaded: loaded (/usr/lib/systemd/system/firewalld.service; enabled; vendor preset: enabled)</span><br><span class="line">   Active: inactive (dead) since Wed 2021-12-01 07:18:02 CST; 17s ago</span><br><span class="line">     Docs: man:firewalld(1)</span><br><span class="line">  Process: 2284187 ExecStart=/usr/sbin/firewalld --nofork --nopid <span class="variable">$FIREWALLD_ARGS</span> (code=exited, status=0/SUC&gt;</span><br><span class="line"> Main PID: 2284187 (code=exited, status=0/SUCCESS)</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>但是，没有防火墙的保护服务器是相当不安全的，这里我们可以使用 iptables 代替</p>
+<h4 id="安装-iptables"><a href="#安装-iptables" class="headerlink" title="安装 iptables"></a>安装 iptables</h4><p>第一步：</p>
+<p>先禁用 firewalld</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">~ systemctl <span class="built_in">disable</span> firewalld.service </span><br><span class="line">Removed /etc/systemd/system/dbus-org.fedoraproject.FirewallD1.service.</span><br><span class="line">Removed /etc/systemd/system/multi-user.target.wants/firewalld.service.</span><br></pre></td></tr></table></figure>
+
+<p>第二步：</p>
+<p>安装并启动 iptables-services，设置开机自启</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">~ dnf install -y iptables-services</span><br><span class="line">~ systemctl start iptables.service </span><br><span class="line">~ systemctl <span class="built_in">enable</span> iptables.service </span><br><span class="line">Created symlink /etc/systemd/system/multi-user.target.wants/iptables.service → /usr/lib/systemd/system/iptables.service.</span><br></pre></td></tr></table></figure>
+
+<p>第三步：</p>
+<p>更改并保存 iptables 规则,重启 systemctl</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 备份 iptables 文件</span></span><br><span class="line">~ <span class="built_in">cp</span> -a /etc/sysconfig/iptables /etc/sysconfig/iptables.bak</span><br><span class="line"><span class="comment"># 设置 INPUT 方向的请求全部拒绝</span></span><br><span class="line">~ iptables -P INPUT DROP </span><br><span class="line"><span class="comment"># 开放所需要的端口</span></span><br><span class="line">~ iptables -I INPUT -p tcp --dport 80 -m state --state NEW -j ACCEPT</span><br><span class="line">~ iptables -I INPUT -p tcp --dport 3306 -m state --state NEW -j ACCEPT</span><br><span class="line"><span class="comment"># 保存规则</span></span><br><span class="line">~ iptables-save &gt; /etc/sysconfig/iptables</span><br><span class="line"><span class="comment"># 重启 systemctl</span></span><br><span class="line">~ systemctl reboot</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+  </article>
+  <footer class="f-cf">
+    
+      <a href="/2021/12/05/Family%20relationships-familyrelationships/" class="link f-fl">⟵Family relationships</a>
+    
+    
+      <a href="/2021/11/14/%E4%B8%A4%E4%B8%AA%E4%B8%80%E4%B8%80%E5%AF%B9%E5%BA%94%E7%9A%84list%EF%BC%8C%E7%BB%84%E5%90%88%E6%88%90%E4%B8%80%E4%B8%AAdict-%E4%B8%A4%E4%B8%AA%E4%B8%80%E4%B8%80%E5%AF%B9%E5%BA%94%E7%9A%84list%E7%BB%84%E5%90%88%E6%88%90%E4%B8%80%E4%B8%AAdict/" class="link f-fr">两个一一对应的list，组合成一个dict⟶</a>
+    
+  </footer>
+</section></div>
+    <footer id="footer" class="f-cf">
+  reidosann@163.com
+  
+    
+      
+        · <a href="https://github.com/evansuner" target="_blank" class="nav-icn">GitHub</a>
+      
+    
+  
+  <span class="copyright">Powered by Evan</span>
+</footer>
+  </div>
+</body>
+</html>

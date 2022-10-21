@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>开发者macOS装机指南 | Evan&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="ClashX Pro优先配置虚拟专用网 Command Line Tools for Xcode1xcode-select --install  Homebrew1234567891011121314151617181920212223242526# 配置环境变量export HOMEBREW_BREW_GIT_REMOTE&#x3D;&quot;https:&#x2F;&#x2F;mirrors.tuna.tsinghua.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="开发者macOS装机指南">
+<meta property="og:url" content="http://example.com/2022/10/08/%E5%BC%80%E5%8F%91%E8%80%85macOS%E8%A3%85%E6%9C%BA%E6%8C%87%E5%8D%97-kai-fa-zhe-macos-zhuang-ji-zhi-nan/index.html">
+<meta property="og:site_name" content="Evan&#39;s Blog">
+<meta property="og:description" content="ClashX Pro优先配置虚拟专用网 Command Line Tools for Xcode1xcode-select --install  Homebrew1234567891011121314151617181920212223242526# 配置环境变量export HOMEBREW_BREW_GIT_REMOTE&#x3D;&quot;https:&#x2F;&#x2F;mirrors.tuna.tsinghua.">
+<meta property="og:locale">
+<meta property="og:image" content="http://cdn-images.reidosann.top/CDN/image-20221017112410779.png">
+<meta property="article:published_time" content="2022-10-08T09:42:44.324Z">
+<meta property="article:modified_time" content="2022-10-17T03:24:50.741Z">
+<meta property="article:author" content="Evan">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://cdn-images.reidosann.top/CDN/image-20221017112410779.png">
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      document.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightBlock(block);
+      });
+    });
+  </script>
+  
+<link rel="stylesheet" href="/css/index.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/" class="title">Evan&#39;s Blog</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://github.com/evansuner" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/" class="nav-menu ">HOME</a>
+          
+        
+            <a href="/archives" class="nav-menu ">ARCHIVE</a>
+          
+        
+            <a href="/about" class="nav-menu ">ABOUT</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+    <div id="main"><section class="article">
+  <h2 class="title">开发者macOS装机指南</h2>
+  <p class="sub">Oct 8, 2022</p>
+  <article class="content">
+    <h2 id="ClashX-Pro"><a href="#ClashX-Pro" class="headerlink" title="ClashX Pro"></a>ClashX Pro</h2><p>优先配置虚拟专用网</p>
+<h2 id="Command-Line-Tools-for-Xcode"><a href="#Command-Line-Tools-for-Xcode" class="headerlink" title="Command Line Tools for Xcode"></a>Command Line Tools for Xcode</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xcode-select --install</span><br></pre></td></tr></table></figure>
+
+<h2 id="Homebrew"><a href="#Homebrew" class="headerlink" title="Homebrew"></a>Homebrew</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 配置环境变量</span></span><br><span class="line"><span class="built_in">export</span> HOMEBREW_BREW_GIT_REMOTE=<span class="string">&quot;https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/brew.git&quot;</span></span><br><span class="line"><span class="built_in">export</span> HOMEBREW_CORE_GIT_REMOTE=<span class="string">&quot;https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-core.git&quot;</span></span><br><span class="line"><span class="built_in">export</span> HOMEBREW_BOTTLE_DOMAIN=<span class="string">&quot;https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装homebrew</span></span><br><span class="line"><span class="comment">## 途径1 使用清华的国内镜像源</span></span><br><span class="line">git <span class="built_in">clone</span> --depth=1 https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/install.git brew-install</span><br><span class="line">/bin/bash brew-install/install.sh</span><br><span class="line"><span class="built_in">rm</span> -rf brew-install</span><br><span class="line"><span class="comment">## 途径2 from github, 前提是配置好外网</span></span><br><span class="line">/bin/bash -c <span class="string">&quot;<span class="subst">$(curl -fsSL https://github.com/Homebrew/install/raw/master/install.sh)</span>&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 针对Apple Silicon 单独配置</span></span><br><span class="line"><span class="built_in">test</span> -r ~/.bash_profile &amp;&amp; <span class="built_in">echo</span> <span class="string">&#x27;eval &quot;$(/opt/homebrew/bin/brew shellenv)&quot;&#x27;</span> &gt;&gt; ~/.bash_profile</span><br><span class="line"><span class="built_in">test</span> -r ~/.zprofile &amp;&amp; <span class="built_in">echo</span> <span class="string">&#x27;eval &quot;$(/opt/homebrew/bin/brew shellenv)&quot;&#x27;</span> &gt;&gt; ~/.zprofile</span><br><span class="line"></span><br><span class="line"><span class="comment"># 替换上有仓库</span></span><br><span class="line"><span class="built_in">export</span> HOMEBREW_BREW_GIT_REMOTE=<span class="string">&quot;https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/brew.git&quot;</span></span><br><span class="line">brew update</span><br><span class="line"><span class="comment">## 使用一条命令自动设置</span></span><br><span class="line"><span class="built_in">export</span> HOMEBREW_CORE_GIT_REMOTE=<span class="string">&quot;https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-core.git&quot;</span></span><br><span class="line"><span class="keyword">for</span> tap <span class="keyword">in</span> core cask&#123;,-fonts,-drivers,-versions&#125; command-not-found; <span class="keyword">do</span></span><br><span class="line">    brew tap --custom-remote --force-auto-update <span class="string">&quot;homebrew/<span class="variable">$&#123;tap&#125;</span>&quot;</span> <span class="string">&quot;https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-<span class="variable">$&#123;tap&#125;</span>.git&quot;</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line">brew update</span><br></pre></td></tr></table></figure>
+
+<h2 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装 </span></span><br><span class="line">brew install -appdir=/Applications docker</span><br><span class="line"></span><br><span class="line"><span class="comment"># 配置</span></span><br><span class="line"><span class="comment">#  打开application -&gt; preference -&gt; Docker Engine -&gt; 添加下列内容</span></span><br><span class="line"><span class="string">&quot;insecure-registries&quot;</span>: [</span><br><span class="line">    <span class="string">&quot;https://mirror.ccs.tencentyun.com&quot;</span>,</span><br><span class="line">    <span class="string">&quot;https://docker.mirrors.ustc.edu.cn&quot;</span></span><br><span class="line">  ]</span><br><span class="line"><span class="comment"># 打开application -&gt; preference -&gt; General -&gt; use Docker Compose V2</span></span><br><span class="line"><span class="comment"># 打开application -&gt; preference -&gt; General -&gt; Start Docekr Desktop when you log in</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Nodejs"><a href="#Nodejs" class="headerlink" title="Nodejs"></a>Nodejs</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装</span></span><br><span class="line">brew install node</span><br><span class="line"></span><br><span class="line"><span class="comment"># 测试</span></span><br><span class="line">node -v                              </span><br><span class="line">v16.15.1</span><br><span class="line">npm -v                </span><br><span class="line">8.19.2</span><br><span class="line"></span><br><span class="line"><span class="comment"># 配置</span></span><br><span class="line"><span class="comment">## 镜像加速</span></span><br><span class="line">npm config <span class="built_in">set</span> registry https://registry.npmmirror.com</span><br><span class="line">sudo npm i yarn -g</span><br><span class="line">yarn config <span class="built_in">set</span> registry https://registry.npmmirror.com</span><br><span class="line"><span class="comment">## 版本控制</span></span><br><span class="line">sudo npm i n -g</span><br><span class="line">n install 16.15.1</span><br></pre></td></tr></table></figure>
+
+<h2 id="Oh-My-ZSH"><a href="#Oh-My-ZSH" class="headerlink" title="Oh-My-ZSH"></a>Oh-My-ZSH</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装</span></span><br><span class="line">sh -c <span class="string">&quot;<span class="subst">$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)</span>&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 配置</span></span><br><span class="line"><span class="comment">## 关闭自动更新</span></span><br><span class="line"><span class="built_in">zstyle</span> <span class="string">&#x27;:omz:update&#x27;</span> mode disabled</span><br><span class="line"><span class="comment">## 插件安装</span></span><br><span class="line">git <span class="built_in">clone</span> https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions</span><br><span class="line">git <span class="built_in">clone</span> https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting</span><br><span class="line">plugins=(git zsh-autosuggestions zsh-syntax-highlighting)</span><br></pre></td></tr></table></figure>
+
+<h2 id="Python"><a href="#Python" class="headerlink" title="Python"></a>Python</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 检查当前版本</span></span><br><span class="line">python --version</span><br><span class="line"></span><br><span class="line"><span class="comment"># python版本控制</span></span><br><span class="line">brew install pyenv</span><br><span class="line"></span><br><span class="line"><span class="comment"># 虚拟环境安装</span></span><br><span class="line"><span class="comment">## 配置pip3 国内镜像源</span></span><br><span class="line">pip3 config <span class="built_in">set</span> global.index-url=global.index-url https://pypi.tuna.tsinghua.edu.cn/simple</span><br><span class="line"><span class="comment">## pyenv-virtualenv安装</span></span><br><span class="line"><span class="comment">### 1. This is the recommended method of installation if you installed pyenv with Homebrew.</span></span><br><span class="line">brew install pyenv-virtualenv</span><br><span class="line"><span class="comment">### 2. After installation, you&#x27;ll still need to do Pyenv shell setup steps then add.</span></span><br><span class="line"><span class="built_in">eval</span> <span class="string">&quot;<span class="subst">$(pyenv virtualenv-init -)</span>&quot;</span></span><br><span class="line"><span class="comment">#### 使用</span></span><br><span class="line">pyenv virtualenv 3.6.8 virtual-env-36  <span class="comment"># 创建指定python版本虚拟环境</span></span><br><span class="line">pyenv virtualenv venv38  <span class="comment"># 创建当前python版本虚拟环境</span></span><br><span class="line"></span><br><span class="line">pyenv activate &lt;name&gt;  <span class="comment"># 激活指定虚拟环境</span></span><br><span class="line">pyenv deactivate  <span class="comment"># 退出当前虚拟环境</span></span><br><span class="line"></span><br><span class="line">pyenv virtualenvs  <span class="comment"># 打印所有的虚拟环境</span></span><br><span class="line"></span><br><span class="line">pyenv uninstall virtual-env-36  <span class="comment"># 卸载虚拟环境</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="MongoDB-amp-MySQL-amp-Redis-amp-Nginx"><a href="#MongoDB-amp-MySQL-amp-Redis-amp-Nginx" class="headerlink" title="MongoDB &amp; MySQL &amp; Redis &amp; Nginx"></a>MongoDB &amp; MySQL &amp; Redis &amp; Nginx</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 编辑docker-compose.yml</span></span><br><span class="line">version: <span class="string">&#x27;3&#x27;</span></span><br><span class="line"></span><br><span class="line">services:</span><br><span class="line">  nginx:</span><br><span class="line">    image: nginx:1</span><br><span class="line">    container_name: nginx</span><br><span class="line">    restart: always</span><br><span class="line">    ports:</span><br><span class="line">      - 80:80</span><br><span class="line">      - 443:443</span><br><span class="line">    volumes:</span><br><span class="line">      - ~/Workspace:/var/www</span><br><span class="line">      - ~/Documents/Logs/nginx:/var/log/nginx</span><br><span class="line">      - ~/Documents/Conf/nginx:/etc/nginx/conf.d</span><br><span class="line"></span><br><span class="line">  mysql:</span><br><span class="line">    image: mysql:5.7</span><br><span class="line">    container_name: mysql</span><br><span class="line">    restart: always</span><br><span class="line">    ports:</span><br><span class="line">      - 3307:3306</span><br><span class="line">    volumes:</span><br><span class="line">      - ~/Documents/Logs/mysql:/var/log/mysql</span><br><span class="line">      - ~/Documents/Data/mysql:/var/lib/mysql</span><br><span class="line">    environment:</span><br><span class="line">      - MYSQL_ROOT_PASSWORD=123456</span><br><span class="line"></span><br><span class="line">  redis:</span><br><span class="line">    image: redis:6</span><br><span class="line">    container_name: redis</span><br><span class="line">    restart: always</span><br><span class="line">    <span class="built_in">command</span>: redis-server --requirepass 123456</span><br><span class="line">    ports:</span><br><span class="line">      - 6379:6379</span><br><span class="line">    volumes:</span><br><span class="line">      - ~/Documents/Data/redis:/data</span><br><span class="line"></span><br><span class="line">  mongo:</span><br><span class="line">    image: mongo:4</span><br><span class="line">    container_name: mongo</span><br><span class="line">    restart: always</span><br><span class="line">    ports:</span><br><span class="line">      - 27017:27017</span><br><span class="line">    volumes:</span><br><span class="line">      - ~/Documents/Data/mongo:/data/db</span><br><span class="line">      - ~/Documents/Logs/mongo:/var/log/mongodb</span><br><span class="line">    environment:</span><br><span class="line">      MONGO_INITDB_ROOT_USERNAME: admin</span><br><span class="line">      MONGO_INITDB_ROOT_PASSWORD: 123456</span><br></pre></td></tr></table></figure>
+<h2 id="Picgo"><a href="#Picgo" class="headerlink" title="Picgo"></a>Picgo</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">sudo npm i -g picgo</span><br><span class="line">vim ~/.picgo/config.json</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">&quot;picBed&quot;</span>: &#123;</span><br><span class="line">    <span class="string">&quot;uploader&quot;</span>: <span class="string">&quot;upyun&quot;</span>,</span><br><span class="line">    <span class="string">&quot;current&quot;</span>: <span class="string">&quot;upyun&quot;</span>,</span><br><span class="line">    <span class="string">&quot;upyun&quot;</span>: &#123;</span><br><span class="line">      <span class="string">&quot;bucket&quot;</span>: <span class="string">&quot;xxx&quot;</span>,</span><br><span class="line">      <span class="string">&quot;operator&quot;</span>: <span class="string">&quot;xxx&quot;</span>,</span><br><span class="line">      <span class="string">&quot;password&quot;</span>: <span class="string">&quot;xxx&quot;</span>,</span><br><span class="line">      <span class="string">&quot;url&quot;</span>: <span class="string">&quot;xxx&quot;</span>,</span><br><span class="line">      <span class="string">&quot;options&quot;</span>: <span class="string">&quot;&quot;</span>,</span><br><span class="line">      <span class="string">&quot;path&quot;</span>: <span class="string">&quot;/xxx&quot;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="string">&quot;transformer&quot;</span>: <span class="string">&quot;path&quot;</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">&quot;picgoPlugins&quot;</span>: &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Typora 配置图片自动上传<br><img src="http://cdn-images.reidosann.top/CDN/image-20221017112410779.png"></p>
+</blockquote>
+<h2 id="开发工具推荐"><a href="#开发工具推荐" class="headerlink" title="开发工具推荐"></a>开发工具推荐</h2><ul>
+<li>Navicat</li>
+<li>Warp</li>
+<li>Visual Studio Code</li>
+<li>PyCharm</li>
+<li>WebStorm</li>
+<li>RDM</li>
+<li>Postman</li>
+<li>ClashX Pro</li>
+<li>Typora</li>
+</ul>
+
+  </article>
+  <footer class="f-cf">
+    
+    
+      <a href="/2022/07/17/%E5%BC%80%E5%8F%91%E8%80%85%E5%B7%A5%E5%85%B7%E9%85%8D%E7%BD%AE-kai-fa-zhe-gong-ju-guo-nei-jing-xiang-yuan-jia-su-pei-zhi/" class="link f-fr">开发者工具配置⟶</a>
+    
+  </footer>
+</section></div>
+    <footer id="footer" class="f-cf">
+  reidosann@163.com
+  
+    
+      
+        · <a href="https://github.com/evansuner" target="_blank" class="nav-icn">GitHub</a>
+      
+    
+  
+  <span class="copyright">Powered by Evan</span>
+</footer>
+  </div>
+</body>
+</html>
